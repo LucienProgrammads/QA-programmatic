@@ -327,7 +327,6 @@
             padding-top: 1.5rem;
         }
 
-        /* RESULT SCREEN WITHOUT CORRECTIONS */
         .result-header {
             text-align: center;
             padding-bottom: 2rem;
@@ -431,7 +430,7 @@
     </header>
 
     <main>
-        <!-- SCREEN 1: IDENTIFICATION & CHOIX DU MODULE -->
+        <!-- SCREEN 1: ACCUEIL & CHOIX DU MODULE -->
         <div id="screenIntro" class="card screen-intro">
             <h1>Évaluation par Module</h1>
             <p>Sélectionnez le module à valider. Vos réponses et votre score seront enregistrés automatiquement pour le suivi manager.</p>
@@ -441,7 +440,7 @@
                 <ul>
                     <li>Évaluation composée de <strong>5 questions ciblées</strong> sur le module sélectionné.</li>
                     <li>Aucune indication de bonne/mauvaise réponse n'est divulguée pendant ou après l'épreuve.</li>
-                    <li>Navigation libre entre les questions avant la validation.</li>
+                    <li>Navigation libre entre les questions avant la validation finale.</li>
                     <li><strong>Seuil de validation : 80% (soit 4/5 minimum)</strong>.</li>
                 </ul>
             </div>
@@ -454,7 +453,7 @@
             <div class="form-group">
                 <label for="moduleSelect">Module à évaluer *</label>
                 <select id="moduleSelect" required>
-                    <option value="" disabled selected>-- Choisissez un module --</option>
+                    <option value="" disabled selected>Chargement des modules...</option>
                 </select>
             </div>
 
@@ -490,7 +489,7 @@
             </div>
         </div>
 
-        <!-- SCREEN 3: RESULTS (CONFIDENTIEL - SCORE ET BOUTON ACCUEIL) -->
+        <!-- SCREEN 3: RESULTATS CONFIDENTIELS & BOUTON ACCUEIL -->
         <div id="screenResult" class="card" style="display: none;">
             <div class="result-header">
                 <div id="statusBadge" class="result-badge">VALIDÉ</div>
@@ -529,12 +528,12 @@
         </div>
     </main>
 
-    <!-- FICHIER DE QUESTIONS EXTERNE -->
-    <script src="questions.js"></script>
+    <!-- CHARGEMENT DU FICHIER QUESTIONS SÉPARÉ (AVEC ANTI-CACHE) -->
+    <script src="questions.js?v=2"></script>
 
     <script>
         // =========================================================================
-        // URL ACTIVE DE VOTRE GOOGLE APPS SCRIPT
+        // URL DE VOTRE APPLICATION WEB GOOGLE APPS SCRIPT
         // =========================================================================
         const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/a/macros/programmads.com/s/AKfycbzhx9bseULtHUZBTgh_WqrKRLovUW667GDYMyCLIRNALOIFBq-IxY6dBQlxXlzQ5paG/exec";
 
@@ -544,15 +543,20 @@
         let candidate = "";
         let selectedModule = "";
 
-        // Initialisation de la liste des modules
-        window.addEventListener("DOMContentLoaded", () => {
-            if (typeof ALL_QUESTIONS === "undefined" || !ALL_QUESTIONS.length) {
-                alert("Erreur : Le fichier 'questions.js' est introuvable ou vide.");
+        // Initialisation robuste des modules
+        function initApp() {
+            const list = window.ALL_QUESTIONS;
+            if (!list || !list.length) {
+                // Si le script est encore en train de se charger, on réessaie 100ms plus tard
+                setTimeout(initApp, 100);
                 return;
             }
 
             const moduleSelect = document.getElementById("moduleSelect");
-            const uniqueModules = [...new Set(ALL_QUESTIONS.map(q => q.module))];
+            if (!moduleSelect) return;
+            
+            const uniqueModules = [...new Set(list.map(q => q.module))];
+            moduleSelect.innerHTML = '<option value="" disabled selected>-- Choisissez un module --</option>';
             
             uniqueModules.forEach(modName => {
                 const opt = document.createElement("option");
@@ -560,7 +564,14 @@
                 opt.textContent = modName;
                 moduleSelect.appendChild(opt);
             });
-        });
+        }
+
+        // Lancement au chargement du DOM ou dès que la page est prête
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initApp);
+        } else {
+            initApp();
+        }
 
         function startQuiz() {
             const nameInput = document.getElementById("candidateName");
@@ -578,220 +589,4 @@
                 return;
             }
 
-            candidate = nameInput.value.trim();
-            selectedModule = modSelect.value;
-
-            // Filtrer les questions uniquement pour le module choisi
-            activeQuestions = ALL_QUESTIONS.filter(q => q.module === selectedModule);
-
-            userAnswers = {};
-            currentIndex = 0;
-
-            document.getElementById("candidateTag").style.display = "block";
-            document.getElementById("candidateTag").textContent = `${candidate} (${selectedModule})`;
-
-            document.getElementById("screenIntro").style.display = "none";
-            document.getElementById("screenResult").style.display = "none";
-            document.getElementById("screenQuiz").style.display = "block";
-
-            renderMatrix();
-            loadQuestion(0);
-        }
-
-        function renderMatrix() {
-            const matrix = document.getElementById("questionMatrix");
-            matrix.innerHTML = "";
-            activeQuestions.forEach((q, idx) => {
-                const btn = document.createElement("button");
-                btn.className = "matrix-btn";
-                btn.id = "matrix-btn-" + idx;
-                btn.textContent = idx + 1;
-                btn.onclick = () => loadQuestion(idx);
-                matrix.appendChild(btn);
-            });
-        }
-
-        function loadQuestion(index) {
-            currentIndex = index;
-            const q = activeQuestions[index];
-
-            document.getElementById("questionCounter").textContent = `Question ${index + 1} sur ${activeQuestions.length}`;
-            document.getElementById("currentModuleTag").textContent = q.module;
-            document.getElementById("currentQuestionText").textContent = q.question;
-
-            const container = document.getElementById("optionsContainer");
-            container.innerHTML = "";
-
-            q.options.forEach((optText, optIdx) => {
-                const div = document.createElement("div");
-                div.className = "option-item" + (userAnswers[q.id] === optIdx ? " selected" : "");
-                div.onclick = () => selectOption(q.id, optIdx);
-
-                div.innerHTML = `
-                    <div class="option-bullet"></div>
-                    <div class="option-label">${optText}</div>
-                `;
-                container.appendChild(div);
-            });
-
-            document.getElementById("btnPrev").disabled = (index === 0);
-            
-            if (index === activeQuestions.length - 1) {
-                document.getElementById("btnNext").style.display = "none";
-                document.getElementById("btnFinish").style.display = "inline-flex";
-            } else {
-                document.getElementById("btnNext").style.display = "inline-flex";
-                document.getElementById("btnFinish").style.display = "none";
-            }
-
-            updateProgress();
-        }
-
-        function selectOption(questionId, optionIndex) {
-            userAnswers[questionId] = optionIndex;
-            
-            const container = document.getElementById("optionsContainer");
-            Array.from(container.children).forEach((child, idx) => {
-                child.classList.toggle("selected", idx === optionIndex);
-            });
-
-            updateProgress();
-        }
-
-        function updateProgress() {
-            const total = activeQuestions.length;
-            const answeredCount = Object.keys(userAnswers).length;
-
-            document.getElementById("answeredCounter").textContent = `${answeredCount} / ${total} répondue(s)`;
-            const percent = (answeredCount / total) * 100;
-            document.getElementById("progressBar").style.width = percent + "%";
-
-            activeQuestions.forEach((q, idx) => {
-                const btn = document.getElementById("matrix-btn-" + idx);
-                if (btn) {
-                    btn.classList.toggle("answered", userAnswers[q.id] !== undefined);
-                    btn.classList.toggle("current", idx === currentIndex);
-                }
-            });
-        }
-
-        function prevQuestion() {
-            if (currentIndex > 0) loadQuestion(currentIndex - 1);
-        }
-
-        function nextQuestion() {
-            if (currentIndex < activeQuestions.length - 1) loadQuestion(currentIndex + 1);
-        }
-
-        function submitExam() {
-            // Validation et calcul direct sans alerte bloquante
-            calculateAndShowResults();
-        }
-
-        function calculateAndShowResults() {
-            let correctCount = 0;
-            const total = activeQuestions.length;
-            const answersDetails = [];
-
-            activeQuestions.forEach((q, idx) => {
-                const chosenIdx = userAnswers[q.id];
-                const isCorrect = (chosenIdx === q.correct);
-                if (isCorrect) correctCount++;
-
-                answersDetails.push({
-                    qIndex: idx + 1,
-                    question: q.question,
-                    chosenAnswer: chosenIdx !== undefined ? q.options[chosenIdx] : "Non répondu",
-                    correctAnswer: q.options[q.correct],
-                    isCorrect: isCorrect
-                });
-            });
-
-            const scorePercent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
-            const isPassed = scorePercent >= 80;
-            const now = new Date().toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
-
-            // Affichage de l'écran des résultats
-            document.getElementById("screenQuiz").style.display = "none";
-            document.getElementById("screenResult").style.display = "block";
-
-            const badge = document.getElementById("statusBadge");
-            if (badge) {
-                badge.className = "result-badge " + (isPassed ? "badge-passed" : "badge-failed");
-                badge.textContent = isPassed ? "STATUT : VALIDÉ (REÇU)" : "STATUT : NON VALIDÉ (À RETRAVAILLER)";
-            }
-
-            const scoreDisplay = document.getElementById("scoreDisplay");
-            if (scoreDisplay) scoreDisplay.textContent = `${correctCount} / ${total}`;
-
-            const scorePercentEl = document.getElementById("scorePercent");
-            if (scorePercentEl) scorePercentEl.textContent = `${scorePercent}% de réussite (Seuil requis : 80%)`;
-
-            const resCandidate = document.getElementById("resCandidate");
-            if (resCandidate) resCandidate.textContent = candidate;
-
-            const resModule = document.getElementById("resModule");
-            if (resModule) resModule.textContent = selectedModule;
-
-            const resDate = document.getElementById("resDate");
-            if (resDate) resDate.textContent = now;
-
-            const resValidation = document.getElementById("resValidation");
-            if (resValidation) resValidation.textContent = isPassed ? "Acquis (≥80%)" : "Non acquis (<80%)";
-
-            // Envoi des données vers le Google Sheet en arrière-plan
-            try {
-                saveResultsToGoogleSheet({
-                    date: now,
-                    candidate: candidate,
-                    module: selectedModule,
-                    score: `${correctCount}/${total}`,
-                    percent: `${scorePercent}%`,
-                    status: isPassed ? "VALIDÉ" : "NON VALIDÉ",
-                    details: answersDetails
-                });
-            } catch (err) {
-                console.warn("Enregistrement local :", err);
-            }
-        }
-
-        function saveResultsToGoogleSheet(data) {
-            const syncBox = document.getElementById("syncStatus");
-            if (!syncBox) return;
-
-            if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("example")) {
-                syncBox.innerHTML = "✓ Évaluation terminée.";
-                syncBox.className = "sync-status-box synced";
-                return;
-            }
-
-            syncBox.textContent = "Enregistrement dans le suivi manager...";
-
-            fetch(GOOGLE_SHEET_WEBAPP_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            .then(() => {
-                syncBox.innerHTML = "✓ Évaluation transmise au tableau de bord.";
-                syncBox.className = "sync-status-box synced";
-            })
-            .catch(() => {
-                syncBox.innerHTML = "✓ Évaluation terminée.";
-                syncBox.className = "sync-status-box synced";
-            });
-        }
-
-        // Bouton Accueil : retour au choix du module en conservant le nom
-        function goToHome() {
-            document.getElementById("screenResult").style.display = "none";
-            document.getElementById("screenQuiz").style.display = "none";
-            document.getElementById("screenIntro").style.display = "block";
-
-            document.getElementById("moduleSelect").value = "";
-            document.getElementById("candidateTag").style.display = "none";
-        }
-    </script>
-</body>
-</html>
+            candidate = nameInput.value.trim
