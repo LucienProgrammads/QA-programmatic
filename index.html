@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Évaluation - Fondamentaux Programmatique</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -22,16 +19,12 @@
             --border: #e2e8f0;
             --bg-card: #ffffff;
             --bg-body: #f8fafc;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
             --radius-md: 12px;
             --radius-lg: 16px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -53,7 +46,7 @@
         }
 
         .header-content {
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -63,24 +56,26 @@
         .brand-badge {
             display: inline-flex;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--primary);
             background-color: var(--primary-light);
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 9999px;
             margin-bottom: 0.25rem;
         }
 
         .header-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
+            color: #0f172a;
         }
 
         .candidate-tag {
-            font-size: 0.875rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             color: var(--text-muted);
             background-color: var(--bg-body);
             padding: 0.35rem 0.75rem;
@@ -91,7 +86,7 @@
 
         main {
             flex: 1;
-            max-width: 900px;
+            max-width: 850px;
             width: 100%;
             margin: 2rem auto;
             padding: 0 1.5rem;
@@ -106,9 +101,9 @@
         }
 
         .screen-intro h1 {
-            font-size: 1.875rem;
+            font-size: 1.75rem;
             font-weight: 800;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: #0f172a;
         }
 
@@ -117,9 +112,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
 
         label {
             display: block;
@@ -129,20 +122,19 @@
             color: #1e293b;
         }
 
-        input[type="text"],
-        select {
+        input[type="text"], select {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.8rem 1rem;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: 1px solid var(--border);
             border-radius: 8px;
             outline: none;
             transition: all 0.2s ease;
+            background-color: white;
         }
 
-        input[type="text"]:focus,
-        select:focus {
+        input[type="text"]:focus, select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
@@ -157,14 +149,8 @@
             color: #1e40af;
         }
 
-        .rules-box ul {
-            padding-left: 1.25rem;
-            margin-top: 0.5rem;
-        }
-
-        .rules-box li {
-            margin-bottom: 0.25rem;
-        }
+        .rules-box ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+        .rules-box li { margin-bottom: 0.25rem; }
 
         .btn {
             display: inline-flex;
@@ -179,39 +165,17 @@
             border: none;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+        .btn-secondary { background-color: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); }
+        .btn-secondary:hover { background-color: #e2e8f0; }
+        .btn-success { background-color: var(--success); color: white; }
+        .btn-success:hover { background-color: #059669; }
 
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background-color: #f1f5f9;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background-color: #e2e8f0;
-        }
-
-        .btn-success {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background-color: #059669;
-        }
-
-        .nav-progress-wrapper {
-            margin-bottom: 2rem;
-        }
+        .nav-progress-wrapper { margin-bottom: 2rem; }
 
         .progress-header {
             display: flex;
@@ -244,12 +208,12 @@
         }
 
         .matrix-btn {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 6px;
             border: 1px solid var(--border);
             background-color: white;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -282,10 +246,10 @@
         }
 
         .question-text {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #0f172a;
-            line-height: 1.4;
+            line-height: 1.45;
             margin-bottom: 1.5rem;
         }
 
@@ -363,6 +327,7 @@
             padding-top: 1.5rem;
         }
 
+        /* RESULT SCREEN WITHOUT CORRECTIONS */
         .result-header {
             text-align: center;
             padding-bottom: 2rem;
@@ -376,7 +341,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            padding: 0.4rem 1rem;
+            padding: 0.45rem 1.25rem;
             border-radius: 9999px;
             margin-bottom: 1rem;
         }
@@ -401,129 +366,58 @@
             margin-bottom: 0.5rem;
         }
 
-        .score-sub {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
+        .score-sub { font-size: 1.15rem; color: var(--text-muted); font-weight: 500; }
 
         .summary-card {
             background-color: #f8fafc;
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 1.25rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
+            gap: 1.25rem;
         }
 
         .summary-item .label {
             font-size: 0.75rem;
             text-transform: uppercase;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-muted);
             margin-bottom: 0.25rem;
         }
 
         .summary-item .val {
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-main);
         }
 
-        .correction-section h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .correction-item {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            background-color: white;
-        }
-
-        .correction-item.is-correct {
-            border-left: 4px solid var(--success);
-        }
-
-        .correction-item.is-incorrect {
-            border-left: 4px solid var(--danger);
-        }
-
-        .correction-q {
-            font-weight: 700;
-            font-size: 0.95rem;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
-        }
-
-        .answer-row {
-            font-size: 0.875rem;
-            margin-bottom: 0.4rem;
-        }
-
-        .answer-label {
-            font-weight: 600;
-            display: inline-block;
-            width: 130px;
-        }
-
-        .user-ans-correct {
-            color: #047857;
-            font-weight: 600;
-        }
-
-        .user-ans-wrong {
-            color: #b91c1c;
-            font-weight: 600;
-        }
-
-        .correct-ans {
-            color: #065f46;
-            font-weight: 600;
-        }
-
-        .explanation-box {
+        .sync-status-box {
             background-color: #f8fafc;
-            border-radius: 6px;
-            padding: 0.75rem;
-            margin-top: 0.75rem;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
             font-size: 0.85rem;
-            color: #475569;
-            border-left: 2px solid #94a3b8;
+            color: var(--text-muted);
         }
 
-        .print-actions {
-            margin-top: 2rem;
+        .sync-status-box.synced {
+            background-color: var(--success-light);
+            border-color: #a7f3d0;
+            color: #065f46;
+        }
+
+        .actions-bar {
             display: flex;
             gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        @media print {
-
-            header,
-            .print-actions,
-            .btn {
-                display: none !important;
-            }
-
-            body {
-                background: white;
-            }
-
-            .card {
-                border: none;
-                box-shadow: none;
-                padding: 0;
-            }
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
-
 <body>
 
     <header>
@@ -537,19 +431,18 @@
     </header>
 
     <main>
-        <!-- SCREEN 1: IDENTIFICATION -->
+        <!-- SCREEN 1: IDENTIFICATION & CHOIX DU MODULE -->
         <div id="screenIntro" class="card screen-intro">
-            <h1>Test d'Évaluation : Section Basique</h1>
-            <p>Ce test mesure votre maîtrise des concepts fondamentaux du plan d'onboarding. Les résultats et le rapport
-                détaillé seront générés à l'issue de l'épreuve.</p>
+            <h1>Évaluation par Module</h1>
+            <p>Sélectionnez le module à valider. Vos réponses et votre score seront enregistrés automatiquement pour le suivi manager.</p>
 
             <div class="rules-box">
                 <strong>Conditions de passage :</strong>
                 <ul>
-                    <li>10 questions au format QCM à choix unique.</li>
-                    <li>Aucune indication de bonne/mauvaise réponse n'est fournie durant l'examen.</li>
-                    <li>Navigation libre : vous pouvez modifier vos réponses avant validation finale.</li>
-                    <li><strong>Seuil de validation exigé : 80%</strong>.</li>
+                    <li>Évaluation composée de <strong>5 questions ciblées</strong> sur le module sélectionné.</li>
+                    <li>Aucune indication de bonne/mauvaise réponse n'est divulguée pendant ou après l'épreuve.</li>
+                    <li>Navigation libre entre les questions avant la validation.</li>
+                    <li><strong>Seuil de validation : 80% (soit 4/5 minimum)</strong>.</li>
                 </ul>
             </div>
 
@@ -559,14 +452,14 @@
             </div>
 
             <div class="form-group">
-                <label for="moduleFilter">Périmètre de l'évaluation</label>
-                <select id="moduleFilter">
-                    <option value="all">Évaluation Complète (Tous les modules)</option>
+                <label for="moduleSelect">Module à évaluer *</label>
+                <select id="moduleSelect" required>
+                    <option value="" disabled selected>-- Choisissez un module --</option>
                 </select>
             </div>
 
             <button class="btn btn-primary" style="width: 100%;" onclick="startQuiz()">
-                Commencer l'évaluation
+                Démarrer l'évaluation du module
             </button>
         </div>
 
@@ -574,8 +467,8 @@
         <div id="screenQuiz" class="card" style="display: none;">
             <div class="nav-progress-wrapper">
                 <div class="progress-header">
-                    <span id="questionCounter">Question 1 sur 10</span>
-                    <span id="answeredCounter" style="color: var(--text-muted);">0 / 10 répondue(s)</span>
+                    <span id="questionCounter">Question 1 sur 5</span>
+                    <span id="answeredCounter" style="color: var(--text-muted);">0 / 5 répondue(s)</span>
                 </div>
                 <div class="progress-bar-bg">
                     <div id="progressBar" class="progress-bar-fill"></div>
@@ -583,7 +476,7 @@
                 <div id="questionMatrix" class="question-matrix"></div>
             </div>
 
-            <div class="module-tag" id="currentModuleTag">Écosystème</div>
+            <div class="module-tag" id="currentModuleTag">Module</div>
             <div class="question-text" id="currentQuestionText">...</div>
 
             <div class="options-list" id="optionsContainer"></div>
@@ -592,104 +485,113 @@
                 <button class="btn btn-secondary" id="btnPrev" onclick="prevQuestion()">Précédent</button>
                 <div style="display: flex; gap: 0.75rem;">
                     <button class="btn btn-secondary" id="btnNext" onclick="nextQuestion()">Suivant</button>
-                    <button class="btn btn-success" id="btnFinish" onclick="submitExam()"
-                        style="display: none;">Terminer l'évaluation</button>
+                    <button class="btn btn-success" id="btnFinish" onclick="submitExam()" style="display: none;">Valider l'évaluation</button>
                 </div>
             </div>
         </div>
 
-        <!-- SCREEN 3: RESULTS & REPORT -->
+        <!-- SCREEN 3: RESULTS (CONFIDENTIEL - SCORE ET BOUTON ACCUEIL) -->
         <div id="screenResult" class="card" style="display: none;">
             <div class="result-header">
                 <div id="statusBadge" class="result-badge">VALIDÉ</div>
-                <div class="score-display" id="scoreDisplay">0 / 10</div>
+                <div class="score-display" id="scoreDisplay">0 / 5</div>
                 <div class="score-sub" id="scorePercent">0% de réussite</div>
             </div>
 
             <div class="summary-card">
                 <div class="summary-item">
-                    <div class="label">Candidat</div>
+                    <div class="label">Apprenant</div>
                     <div class="val" id="resCandidate">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Module Validé</div>
+                    <div class="val" id="resModule">--</div>
                 </div>
                 <div class="summary-item">
                     <div class="label">Date & Heure</div>
                     <div class="val" id="resDate">--</div>
                 </div>
                 <div class="summary-item">
-                    <div class="label">Périmètre</div>
-                    <div class="val" id="resModule">Tous les modules</div>
-                </div>
-                <div class="summary-item">
-                    <div class="label">Validation Seuil 80%</div>
+                    <div class="label">Statut Seuil 80%</div>
                     <div class="val" id="resValidation">--</div>
                 </div>
             </div>
 
-            <div class="correction-section">
-                <h2>Rapport d'évaluation détaillé</h2>
-                <div id="correctionList"></div>
+            <div id="syncStatus" class="sync-status-box">
+                Enregistrement dans le suivi manager...
             </div>
 
-            <div class="print-actions">
-                <button class="btn btn-secondary" onclick="copyReport()">Copier le compte-rendu</button>
-                <button class="btn btn-primary" onclick="window.print()">Imprimer / Sauvegarder en PDF</button>
+            <div class="actions-bar">
+                <button class="btn btn-primary" onclick="goToHome()">
+                    🏠 Passer un autre module (Accueil)
+                </button>
             </div>
         </div>
     </main>
 
-    <!-- 1. IMPORT DU FICHIER DE QUESTIONS EXTERNE -->
+    <!-- FICHIER DE QUESTIONS EXTERNE -->
     <script src="questions.js"></script>
 
-    <!-- 2. LOGIQUE DU MOTEUR DU QUIZ -->
     <script>
+        // =========================================================================
+        // URL ACTIVE DE VOTRE GOOGLE APPS SCRIPT
+        // =========================================================================
+        const GOOGLE_SHEET_WEBAPP_URL = "https://script.google.com/a/macros/programmads.com/s/AKfycbzhx9bseULtHUZBTgh_WqrKRLovUW667GDYMyCLIRNALOIFBq-IxY6dBQlxXlzQ5paG/exec";
+
         let activeQuestions = [];
         let userAnswers = {};
         let currentIndex = 0;
         let candidate = "";
-        let selectedScope = "all";
+        let selectedModule = "";
 
-        // Initialisation automatique des modules dans la liste déroulante
+        // Initialisation de la liste des modules
         window.addEventListener("DOMContentLoaded", () => {
             if (typeof ALL_QUESTIONS === "undefined" || !ALL_QUESTIONS.length) {
-                alert("Erreur : Le fichier 'questions.js' est introuvable ou vide. Vérifiez qu'il se trouve bien dans le même dossier que index.html.");
+                alert("Erreur : Le fichier 'questions.js' est introuvable ou vide.");
                 return;
             }
 
-            const moduleSelect = document.getElementById("moduleFilter");
+            const moduleSelect = document.getElementById("moduleSelect");
             const uniqueModules = [...new Set(ALL_QUESTIONS.map(q => q.module))];
-
+            
             uniqueModules.forEach(modName => {
                 const opt = document.createElement("option");
                 opt.value = modName;
-                opt.textContent = "Module : " + modName;
+                opt.textContent = modName;
                 moduleSelect.appendChild(opt);
             });
         });
 
         function startQuiz() {
             const nameInput = document.getElementById("candidateName");
+            const modSelect = document.getElementById("moduleSelect");
+
             if (!nameInput.value.trim()) {
-                alert("Veuillez renseigner votre Prénom et Nom pour débuter l'évaluation.");
+                alert("Veuillez renseigner votre Prénom et Nom.");
                 nameInput.focus();
                 return;
             }
 
-            candidate = nameInput.value.trim();
-            selectedScope = document.getElementById("moduleFilter").value;
-
-            if (selectedScope === "all") {
-                activeQuestions = [...ALL_QUESTIONS];
-            } else {
-                activeQuestions = ALL_QUESTIONS.filter(q => q.module === selectedScope);
+            if (!modSelect.value) {
+                alert("Veuillez sélectionner un module.");
+                modSelect.focus();
+                return;
             }
+
+            candidate = nameInput.value.trim();
+            selectedModule = modSelect.value;
+
+            // Filtrer les questions uniquement pour le module choisi
+            activeQuestions = ALL_QUESTIONS.filter(q => q.module === selectedModule);
 
             userAnswers = {};
             currentIndex = 0;
 
             document.getElementById("candidateTag").style.display = "block";
-            document.getElementById("candidateTag").textContent = candidate;
+            document.getElementById("candidateTag").textContent = `${candidate} (${selectedModule})`;
 
             document.getElementById("screenIntro").style.display = "none";
+            document.getElementById("screenResult").style.display = "none";
             document.getElementById("screenQuiz").style.display = "block";
 
             renderMatrix();
@@ -733,7 +635,7 @@
             });
 
             document.getElementById("btnPrev").disabled = (index === 0);
-
+            
             if (index === activeQuestions.length - 1) {
                 document.getElementById("btnNext").style.display = "none";
                 document.getElementById("btnFinish").style.display = "inline-flex";
@@ -747,7 +649,7 @@
 
         function selectOption(questionId, optionIndex) {
             userAnswers[questionId] = optionIndex;
-
+            
             const container = document.getElementById("optionsContainer");
             Array.from(container.children).forEach((child, idx) => {
                 child.classList.toggle("selected", idx === optionIndex);
@@ -782,109 +684,114 @@
         }
 
         function submitExam() {
-            const total = activeQuestions.length;
-            const answeredCount = Object.keys(userAnswers).length;
-
-            if (answeredCount < total) {
-                const unanswered = total - answeredCount;
-                if (!confirm(`Attention : il vous reste ${unanswered} question(s) non répondue(s). Souhaitez-vous tout de même soumettre votre examen ?`)) {
-                    return;
-                }
-            } else {
-                if (!confirm("Êtes-vous certain de vouloir soumettre vos réponses pour évaluation ?")) {
-                    return;
-                }
-            }
-
+            // Validation et calcul direct sans alerte bloquante
             calculateAndShowResults();
         }
 
         function calculateAndShowResults() {
             let correctCount = 0;
             const total = activeQuestions.length;
+            const answersDetails = [];
 
-            activeQuestions.forEach(q => {
-                if (userAnswers[q.id] === q.correct) correctCount++;
+            activeQuestions.forEach((q, idx) => {
+                const chosenIdx = userAnswers[q.id];
+                const isCorrect = (chosenIdx === q.correct);
+                if (isCorrect) correctCount++;
+
+                answersDetails.push({
+                    qIndex: idx + 1,
+                    question: q.question,
+                    chosenAnswer: chosenIdx !== undefined ? q.options[chosenIdx] : "Non répondu",
+                    correctAnswer: q.options[q.correct],
+                    isCorrect: isCorrect
+                });
             });
 
-            const scorePercent = Math.round((correctCount / total) * 100);
+            const scorePercent = total > 0 ? Math.round((correctCount / total) * 100) : 0;
             const isPassed = scorePercent >= 80;
+            const now = new Date().toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
 
+            // Affichage de l'écran des résultats
             document.getElementById("screenQuiz").style.display = "none";
             document.getElementById("screenResult").style.display = "block";
 
             const badge = document.getElementById("statusBadge");
-            if (isPassed) {
-                badge.className = "result-badge badge-passed";
-                badge.textContent = "STATUT : VALIDÉ (REÇU)";
-            } else {
-                badge.className = "result-badge badge-failed";
-                badge.textContent = "STATUT : NON VALIDÉ (À RETRAVAILLER)";
+            if (badge) {
+                badge.className = "result-badge " + (isPassed ? "badge-passed" : "badge-failed");
+                badge.textContent = isPassed ? "STATUT : VALIDÉ (REÇU)" : "STATUT : NON VALIDÉ (À RETRAVAILLER)";
             }
 
-            document.getElementById("scoreDisplay").textContent = `${correctCount} / ${total}`;
-            document.getElementById("scorePercent").textContent = `${scorePercent}% de réussite (Seuil requis : 80%)`;
+            const scoreDisplay = document.getElementById("scoreDisplay");
+            if (scoreDisplay) scoreDisplay.textContent = `${correctCount} / ${total}`;
 
-            document.getElementById("resCandidate").textContent = candidate;
-            document.getElementById("resDate").textContent = new Date().toLocaleDateString('fr-FR', {
-                day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-            });
-            document.getElementById("resModule").textContent = selectedScope === "all" ? "Tous les modules" : selectedScope;
-            document.getElementById("resValidation").textContent = isPassed ? "Acquis" : "Non acquis";
+            const scorePercentEl = document.getElementById("scorePercent");
+            if (scorePercentEl) scorePercentEl.textContent = `${scorePercent}% de réussite (Seuil requis : 80%)`;
 
-            const corrList = document.getElementById("correctionList");
-            corrList.innerHTML = "";
+            const resCandidate = document.getElementById("resCandidate");
+            if (resCandidate) resCandidate.textContent = candidate;
 
-            activeQuestions.forEach((q, idx) => {
-                const userChoice = userAnswers[q.id];
-                const isCorrect = (userChoice === q.correct);
+            const resModule = document.getElementById("resModule");
+            if (resModule) resModule.textContent = selectedModule;
 
-                const item = document.createElement("div");
-                item.className = "correction-item " + (isCorrect ? "is-correct" : "is-incorrect");
+            const resDate = document.getElementById("resDate");
+            if (resDate) resDate.textContent = now;
 
-                const userText = userChoice !== undefined ? q.options[userChoice] : "Aucune réponse fournie";
-                const correctText = q.options[q.correct];
+            const resValidation = document.getElementById("resValidation");
+            if (resValidation) resValidation.textContent = isPassed ? "Acquis (≥80%)" : "Non acquis (<80%)";
 
-                item.innerHTML = `
-                    <div class="correction-q">Question ${idx + 1} (${q.module}) : ${q.question}</div>
-                    <div class="answer-row">
-                        <span class="answer-label">Votre réponse :</span>
-                        <span class="${isCorrect ? 'user-ans-correct' : 'user-ans-wrong'}">${isCorrect ? '✓' : '✗'} ${userText}</span>
-                    </div>
-                    ${!isCorrect ? `
-                    <div class="answer-row">
-                        <span class="answer-label">Bonne réponse :</span>
-                        <span class="correct-ans">${correctText}</span>
-                    </div>
-                    ` : ''}
-                    <div class="explanation-box">
-                        <strong>Explication :</strong> ${q.explanation}
-                    </div>
-                `;
-                corrList.appendChild(item);
+            // Envoi des données vers le Google Sheet en arrière-plan
+            try {
+                saveResultsToGoogleSheet({
+                    date: now,
+                    candidate: candidate,
+                    module: selectedModule,
+                    score: `${correctCount}/${total}`,
+                    percent: `${scorePercent}%`,
+                    status: isPassed ? "VALIDÉ" : "NON VALIDÉ",
+                    details: answersDetails
+                });
+            } catch (err) {
+                console.warn("Enregistrement local :", err);
+            }
+        }
+
+        function saveResultsToGoogleSheet(data) {
+            const syncBox = document.getElementById("syncStatus");
+            if (!syncBox) return;
+
+            if (!GOOGLE_SHEET_WEBAPP_URL || GOOGLE_SHEET_WEBAPP_URL.includes("example")) {
+                syncBox.innerHTML = "✓ Évaluation terminée.";
+                syncBox.className = "sync-status-box synced";
+                return;
+            }
+
+            syncBox.textContent = "Enregistrement dans le suivi manager...";
+
+            fetch(GOOGLE_SHEET_WEBAPP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                syncBox.innerHTML = "✓ Évaluation transmise au tableau de bord.";
+                syncBox.className = "sync-status-box synced";
+            })
+            .catch(() => {
+                syncBox.innerHTML = "✓ Évaluation terminée.";
+                syncBox.className = "sync-status-box synced";
             });
         }
 
-        function copyReport() {
-            let correctCount = 0;
-            activeQuestions.forEach(q => {
-                if (userAnswers[q.id] === q.correct) correctCount++;
-            });
-            const percent = Math.round((correctCount / activeQuestions.length) * 100);
+        // Bouton Accueil : retour au choix du module en conservant le nom
+        function goToHome() {
+            document.getElementById("screenResult").style.display = "none";
+            document.getElementById("screenQuiz").style.display = "none";
+            document.getElementById("screenIntro").style.display = "block";
 
-            const text = `RÉSULTAT ÉVALUATION ONBOARDING PROGRAMMATIQUE\n` +
-                `Apprenant : ${candidate}\n` +
-                `Date : ${new Date().toLocaleDateString('fr-FR')}\n` +
-                `Score : ${correctCount}/${activeQuestions.length} (${percent}%)\n` +
-                `Statut : ${percent >= 80 ? 'VALIDÉ' : 'À RETRAVAILLER'}`;
-
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Le compte-rendu a été copié dans votre presse-papiers !");
-            }).catch(() => {
-                alert("Impossible de copier automatiquement.");
-            });
+            document.getElementById("moduleSelect").value = "";
+            document.getElementById("candidateTag").style.display = "none";
         }
     </script>
 </body>
-
 </html>
