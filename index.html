@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation - Fondamentaux Programmatique</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --success: #10b981;
+            --success-light: #ecfdf5;
+            --danger: #ef4444;
+            --danger-light: #fef2f2;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bg-card: #ffffff;
+            --bg-body: #f8fafc;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            background-color: var(--primary-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .candidate-tag {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            background-color: var(--bg-body);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: none;
+        }
+
+        main {
+            flex: 1;
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .screen-intro h1 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            color: #0f172a;
+        }
+
+        .screen-intro p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .rules-box {
+            background-color: var(--primary-light);
+            border: 1px solid #bfdbfe;
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        .rules-box ul {
+            padding-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .rules-box li {
+            margin-bottom: 0.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: #e2e8f0;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .nav-progress-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar-bg {
+            background-color: #f1f5f9;
+            height: 6px;
+            border-radius: 9999px;
+            overflow: hidden;
+            margin-bottom: 1.25rem;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--primary) 0%, #3b82f6 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-matrix {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .matrix-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background-color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .matrix-btn.answered {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .matrix-btn.current {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .module-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            background-color: var(--primary-light);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .option-item:hover {
+            border-color: #cbd5e1;
+            background-color: #f8fafc;
+        }
+
+        .option-item.selected {
+            border-color: var(--primary);
+            background-color: var(--primary-light);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .option-bullet {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            margin-right: 1rem;
+            margin-top: 0.15rem;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-item.selected .option-bullet {
+            border-color: var(--primary);
+        }
+
+        .option-item.selected .option-bullet::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+
+        .option-label {
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .option-item.selected .option-label {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .nav-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        .result-header {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .result-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+        }
+
+        .badge-passed {
+            background-color: var(--success-light);
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .badge-failed {
+            background-color: var(--danger-light);
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-sub {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .summary-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .summary-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-item .val {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .correction-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .correction-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            background-color: white;
+        }
+
+        .correction-item.is-correct {
+            border-left: 4px solid var(--success);
+        }
+
+        .correction-item.is-incorrect {
+            border-left: 4px solid var(--danger);
+        }
+
+        .correction-q {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: #1e293b;
+        }
+
+        .answer-row {
+            font-size: 0.875rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .answer-label {
+            font-weight: 600;
+            display: inline-block;
+            width: 130px;
+        }
+
+        .user-ans-correct {
+            color: #047857;
+            font-weight: 600;
+        }
+
+        .user-ans-wrong {
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
+        .correct-ans {
+            color: #065f46;
+            font-weight: 600;
+        }
+
+        .explanation-box {
+            background-color: #f8fafc;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #475569;
+            border-left: 2px solid #94a3b8;
+        }
+
+        .print-actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        @media print {
+
+            header,
+            .print-actions,
+            .btn {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .card {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="brand-badge">Onboarding Newbie · GMP</div>
+                <div class="header-title">Plateforme d'Évaluation Programmatique</div>
+            </div>
+            <div id="candidateTag" class="candidate-tag"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- SCREEN 1: IDENTIFICATION -->
+        <div id="screenIntro" class="card screen-intro">
+            <h1>Test d'Évaluation : Section Basique</h1>
+            <p>Ce test mesure votre maîtrise des concepts fondamentaux du plan d'onboarding. Les résultats et le rapport
+                détaillé seront générés à l'issue de l'épreuve.</p>
+
+            <div class="rules-box">
+                <strong>Conditions de passage :</strong>
+                <ul>
+                    <li>10 questions au format QCM à choix unique.</li>
+                    <li>Aucune indication de bonne/mauvaise réponse n'est fournie durant l'examen.</li>
+                    <li>Navigation libre : vous pouvez modifier vos réponses avant validation finale.</li>
+                    <li><strong>Seuil de validation exigé : 80%</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="candidateName">Nom et Prénom de l'apprenant *</label>
+                <input type="text" id="candidateName" placeholder="Ex: Lucien RANDRIA" required>
+            </div>
+
+            <div class="form-group">
+                <label for="moduleFilter">Périmètre de l'évaluation</label>
+                <select id="moduleFilter">
+                    <option value="all">Évaluation Complète (Tous les modules)</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="startQuiz()">
+                Commencer l'évaluation
+            </button>
+        </div>
+
+        <!-- SCREEN 2: EXAM QUIZ -->
+        <div id="screenQuiz" class="card" style="display: none;">
+            <div class="nav-progress-wrapper">
+                <div class="progress-header">
+                    <span id="questionCounter">Question 1 sur 10</span>
+                    <span id="answeredCounter" style="color: var(--text-muted);">0 / 10 répondue(s)</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-bar-fill"></div>
+                </div>
+                <div id="questionMatrix" class="question-matrix"></div>
+            </div>
+
+            <div class="module-tag" id="currentModuleTag">Écosystème</div>
+            <div class="question-text" id="currentQuestionText">...</div>
+
+            <div class="options-list" id="optionsContainer"></div>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary" id="btnPrev" onclick="prevQuestion()">Précédent</button>
+                <div style="display: flex; gap: 0.75rem;">
+                    <button class="btn btn-secondary" id="btnNext" onclick="nextQuestion()">Suivant</button>
+                    <button class="btn btn-success" id="btnFinish" onclick="submitExam()"
+                        style="display: none;">Terminer l'évaluation</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULTS & REPORT -->
+        <div id="screenResult" class="card" style="display: none;">
+            <div class="result-header">
+                <div id="statusBadge" class="result-badge">VALIDÉ</div>
+                <div class="score-display" id="scoreDisplay">0 / 10</div>
+                <div class="score-sub" id="scorePercent">0% de réussite</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-item">
+                    <div class="label">Candidat</div>
+                    <div class="val" id="resCandidate">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Date & Heure</div>
+                    <div class="val" id="resDate">--</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Périmètre</div>
+                    <div class="val" id="resModule">Tous les modules</div>
+                </div>
+                <div class="summary-item">
+                    <div class="label">Validation Seuil 80%</div>
+                    <div class="val" id="resValidation">--</div>
+                </div>
+            </div>
+
+            <div class="correction-section">
+                <h2>Rapport d'évaluation détaillé</h2>
+                <div id="correctionList"></div>
+            </div>
+
+            <div class="print-actions">
+                <button class="btn btn-secondary" onclick="copyReport()">Copier le compte-rendu</button>
+                <button class="btn btn-primary" onclick="window.print()">Imprimer / Sauvegarder en PDF</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 1. IMPORT DU FICHIER DE QUESTIONS EXTERNE -->
+    <script src="questions.js"></script>
+
+    <!-- 2. LOGIQUE DU MOTEUR DU QUIZ -->
+    <script>
+        let activeQuestions = [];
+        let userAnswers = {};
+        let currentIndex = 0;
+        let candidate = "";
+        let selectedScope = "all";
+
+        // Initialisation automatique des modules dans la liste déroulante
+        window.addEventListener("DOMContentLoaded", () => {
+            if (typeof ALL_QUESTIONS === "undefined" || !ALL_QUESTIONS.length) {
+                alert("Erreur : Le fichier 'questions.js' est introuvable ou vide. Vérifiez qu'il se trouve bien dans le même dossier que index.html.");
+                return;
+            }
+
+            const moduleSelect = document.getElementById("moduleFilter");
+            const uniqueModules = [...new Set(ALL_QUESTIONS.map(q => q.module))];
+
+            uniqueModules.forEach(modName => {
+                const opt = document.createElement("option");
+                opt.value = modName;
+                opt.textContent = "Module : " + modName;
+                moduleSelect.appendChild(opt);
+            });
+        });
+
+        function startQuiz() {
+            const nameInput = document.getElementById("candidateName");
+            if (!nameInput.value.trim()) {
+                alert("Veuillez renseigner votre Prénom et Nom pour débuter l'évaluation.");
+                nameInput.focus();
+                return;
+            }
+
+            candidate = nameInput.value.trim();
+            selectedScope = document.getElementById("moduleFilter").value;
+
+            if (selectedScope === "all") {
+                activeQuestions = [...ALL_QUESTIONS];
+            } else {
+                activeQuestions = ALL_QUESTIONS.filter(q => q.module === selectedScope);
+            }
+
+            userAnswers = {};
+            currentIndex = 0;
+
+            document.getElementById("candidateTag").style.display = "block";
+            document.getElementById("candidateTag").textContent = candidate;
+
+            document.getElementById("screenIntro").style.display = "none";
+            document.getElementById("screenQuiz").style.display = "block";
+
+            renderMatrix();
+            loadQuestion(0);
+        }
+
+        function renderMatrix() {
+            const matrix = document.getElementById("questionMatrix");
+            matrix.innerHTML = "";
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "matrix-btn";
+                btn.id = "matrix-btn-" + idx;
+                btn.textContent = idx + 1;
+                btn.onclick = () => loadQuestion(idx);
+                matrix.appendChild(btn);
+            });
+        }
+
+        function loadQuestion(index) {
+            currentIndex = index;
+            const q = activeQuestions[index];
+
+            document.getElementById("questionCounter").textContent = `Question ${index + 1} sur ${activeQuestions.length}`;
+            document.getElementById("currentModuleTag").textContent = q.module;
+            document.getElementById("currentQuestionText").textContent = q.question;
+
+            const container = document.getElementById("optionsContainer");
+            container.innerHTML = "";
+
+            q.options.forEach((optText, optIdx) => {
+                const div = document.createElement("div");
+                div.className = "option-item" + (userAnswers[q.id] === optIdx ? " selected" : "");
+                div.onclick = () => selectOption(q.id, optIdx);
+
+                div.innerHTML = `
+                    <div class="option-bullet"></div>
+                    <div class="option-label">${optText}</div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById("btnPrev").disabled = (index === 0);
+
+            if (index === activeQuestions.length - 1) {
+                document.getElementById("btnNext").style.display = "none";
+                document.getElementById("btnFinish").style.display = "inline-flex";
+            } else {
+                document.getElementById("btnNext").style.display = "inline-flex";
+                document.getElementById("btnFinish").style.display = "none";
+            }
+
+            updateProgress();
+        }
+
+        function selectOption(questionId, optionIndex) {
+            userAnswers[questionId] = optionIndex;
+
+            const container = document.getElementById("optionsContainer");
+            Array.from(container.children).forEach((child, idx) => {
+                child.classList.toggle("selected", idx === optionIndex);
+            });
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = activeQuestions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+
+            document.getElementById("answeredCounter").textContent = `${answeredCount} / ${total} répondue(s)`;
+            const percent = (answeredCount / total) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+
+            activeQuestions.forEach((q, idx) => {
+                const btn = document.getElementById("matrix-btn-" + idx);
+                if (btn) {
+                    btn.classList.toggle("answered", userAnswers[q.id] !== undefined);
+                    btn.classList.toggle("current", idx === currentIndex);
+                }
+            });
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) loadQuestion(currentIndex - 1);
+        }
+
+        function nextQuestion() {
+            if (currentIndex < activeQuestions.length - 1) loadQuestion(currentIndex + 1);
+        }
+
+        function submitExam() {
+            const total = activeQuestions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+
+            if (answeredCount < total) {
+                const unanswered = total - answeredCount;
+                if (!confirm(`Attention : il vous reste ${unanswered} question(s) non répondue(s). Souhaitez-vous tout de même soumettre votre examen ?`)) {
+                    return;
+                }
+            } else {
+                if (!confirm("Êtes-vous certain de vouloir soumettre vos réponses pour évaluation ?")) {
+                    return;
+                }
+            }
+
+            calculateAndShowResults();
+        }
+
+        function calculateAndShowResults() {
+            let correctCount = 0;
+            const total = activeQuestions.length;
+
+            activeQuestions.forEach(q => {
+                if (userAnswers[q.id] === q.correct) correctCount++;
+            });
+
+            const scorePercent = Math.round((correctCount / total) * 100);
+            const isPassed = scorePercent >= 80;
+
+            document.getElementById("screenQuiz").style.display = "none";
+            document.getElementById("screenResult").style.display = "block";
+
+            const badge = document.getElementById("statusBadge");
+            if (isPassed) {
+                badge.className = "result-badge badge-passed";
+                badge.textContent = "STATUT : VALIDÉ (REÇU)";
+            } else {
+                badge.className = "result-badge badge-failed";
+                badge.textContent = "STATUT : NON VALIDÉ (À RETRAVAILLER)";
+            }
+
+            document.getElementById("scoreDisplay").textContent = `${correctCount} / ${total}`;
+            document.getElementById("scorePercent").textContent = `${scorePercent}% de réussite (Seuil requis : 80%)`;
+
+            document.getElementById("resCandidate").textContent = candidate;
+            document.getElementById("resDate").textContent = new Date().toLocaleDateString('fr-FR', {
+                day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+            document.getElementById("resModule").textContent = selectedScope === "all" ? "Tous les modules" : selectedScope;
+            document.getElementById("resValidation").textContent = isPassed ? "Acquis" : "Non acquis";
+
+            const corrList = document.getElementById("correctionList");
+            corrList.innerHTML = "";
+
+            activeQuestions.forEach((q, idx) => {
+                const userChoice = userAnswers[q.id];
+                const isCorrect = (userChoice === q.correct);
+
+                const item = document.createElement("div");
+                item.className = "correction-item " + (isCorrect ? "is-correct" : "is-incorrect");
+
+                const userText = userChoice !== undefined ? q.options[userChoice] : "Aucune réponse fournie";
+                const correctText = q.options[q.correct];
+
+                item.innerHTML = `
+                    <div class="correction-q">Question ${idx + 1} (${q.module}) : ${q.question}</div>
+                    <div class="answer-row">
+                        <span class="answer-label">Votre réponse :</span>
+                        <span class="${isCorrect ? 'user-ans-correct' : 'user-ans-wrong'}">${isCorrect ? '✓' : '✗'} ${userText}</span>
+                    </div>
+                    ${!isCorrect ? `
+                    <div class="answer-row">
+                        <span class="answer-label">Bonne réponse :</span>
+                        <span class="correct-ans">${correctText}</span>
+                    </div>
+                    ` : ''}
+                    <div class="explanation-box">
+                        <strong>Explication :</strong> ${q.explanation}
+                    </div>
+                `;
+                corrList.appendChild(item);
+            });
+        }
+
+        function copyReport() {
+            let correctCount = 0;
+            activeQuestions.forEach(q => {
+                if (userAnswers[q.id] === q.correct) correctCount++;
+            });
+            const percent = Math.round((correctCount / activeQuestions.length) * 100);
+
+            const text = `RÉSULTAT ÉVALUATION ONBOARDING PROGRAMMATIQUE\n` +
+                `Apprenant : ${candidate}\n` +
+                `Date : ${new Date().toLocaleDateString('fr-FR')}\n` +
+                `Score : ${correctCount}/${activeQuestions.length} (${percent}%)\n` +
+                `Statut : ${percent >= 80 ? 'VALIDÉ' : 'À RETRAVAILLER'}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Le compte-rendu a été copié dans votre presse-papiers !");
+            }).catch(() => {
+                alert("Impossible de copier automatiquement.");
+            });
+        }
+    </script>
+</body>
+
+</html>
