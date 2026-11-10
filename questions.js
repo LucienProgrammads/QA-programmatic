@@ -1,9 +1,9 @@
 /**
- * BANQUE DE QUESTIONS DU QUIZ PROGRAMMATIQUE (MODULAIRE)
- * 5 modules x 5 questions = 25 questions professionnelles
+ * BANQUE DE QUESTIONS - QUIZ PROGRAMMATIQUE MODULAIRE
+ * 5 modules x 5 questions = 25 questions
  */
 
-const ALL_QUESTIONS = [
+window.ALL_QUESTIONS = [
   // ==========================================
   // MODULE 1 : Écosystème programmatique (5 questions)
   // ==========================================
@@ -17,8 +17,7 @@ const ALL_QUESTIONS = [
       "Héberger et auditer les créatives dynamiques",
       "Mesurer la conversion post-clic sur le site marchand"
     ],
-    correct: 0,
-    explanation: "La SSP (Supply-Side Platform) permet aux éditeurs de monétiser leurs espaces et d'optimiser leur yield management."
+    correct: 0
   },
   {
     id: 2,
@@ -30,8 +29,7 @@ const ALL_QUESTIONS = [
       "Preferred Deal",
       "Programmatic Guaranteed"
     ],
-    correct: 3,
-    explanation: "Le Programmatic Guaranteed (PG) engage les deux parties sur un volume garanti et un CPM fixe."
+    correct: 3
   },
   {
     id: 3,
@@ -43,8 +41,7 @@ const ALL_QUESTIONS = [
       "Le second prix ne s'applique que dans le cadre des Preferred Deals",
       "Au premier prix, l'éditeur ne perçoit aucune commission de la part du SSP"
     ],
-    correct: 0,
-    explanation: "Dans le First-Price Auction, le gagnant paie son bid exact, contrairement au Second-Price historique (bid n°2 + 0.01$)."
+    correct: 0
   },
   {
     id: 4,
@@ -56,8 +53,7 @@ const ALL_QUESTIONS = [
       "La notification confirmant que la créative a été validée par l'ad server",
       "L'ordre de virement bancaire entre l'annonceur et l'éditeur"
     ],
-    correct: 0,
-    explanation: "La Bid Request contient toutes les informations contextuelles, techniques et d'audience permettant au DSP de décider s'il enchérit et à quel prix."
+    correct: 0
   },
   {
     id: 5,
@@ -69,8 +65,7 @@ const ALL_QUESTIONS = [
       "Il supprime totalement le besoin d'un ad server pour l'éditeur",
       "Il force l'achat d'espaces display uniquement en programmatique garanti"
     ],
-    correct: 0,
-    explanation: "Le Header Bidding met en concurrence simultanée toutes les sources d'achat avant que l'ad server de l'éditeur ne prenne sa décision finale."
+    correct: 0
   },
 
   // ==========================================
@@ -86,8 +81,7 @@ const ALL_QUESTIONS = [
       "L'exclusion des clients 1st party existants uniquement",
       "Une audience similaire basée sur la liste d'acheteurs récents via cookies tiers"
     ],
-    correct: 0,
-    explanation: "Le ciblage contextuel analyse la thématique de la page visitée en temps réel sans nécessiter de traceurs ni identifiants tiers."
+    correct: 0
   },
   {
     id: 7,
@@ -99,8 +93,7 @@ const ALL_QUESTIONS = [
       "Garantir un taux de visibilité minimum de 70% sur l'inventaire acheté",
       "Bloquer la diffusion sur les appareils mobiles connectés en Wi-Fi"
     ],
-    correct: 0,
-    explanation: "Le frequency capping évite la surexposition publicitaire en limitant le nombre d'impressions par utilisateur."
+    correct: 0
   },
   {
     id: 8,
@@ -112,8 +105,7 @@ const ALL_QUESTIONS = [
       "Les listes d'exclusion de mots-clés fournies par les régies publicitaires",
       "Les profils socio-démographiques standard modélisés par le DSP"
     ],
-    correct: 0,
-    explanation: "La 1st party data est la donnée propriétaire directe appartenant à l'annonceur (CRM, analytics, transactions)."
+    correct: 0
   },
   {
     id: 9,
@@ -125,8 +117,7 @@ const ALL_QUESTIONS = [
       "Acheter obligatoirement des deals privés avec les éditeurs média",
       "Limiter la diffusion aux formats bannières 300x250 exclusivement"
     ],
-    correct: 0,
-    explanation: "Le remarketing dynamique exige la remontée des IDs produits (via Floodlight/Pixel DSP) pour reconstituer la créa personnalisée."
+    correct: 0
   },
   {
     id: 10,
@@ -138,8 +129,7 @@ const ALL_QUESTIONS = [
       "Elle diffuse l'annonce uniquement sur les moteurs de recherche payants",
       "Elle garantit un taux de conversion 100% supérieur aux audiences socio-démographiques"
     ],
-    correct: 0,
-    explanation: "L'algorithme de lookalike prend une base seed (ex: meilleurs clients) et recherche des jumeaux statistiques parmi les internautes."
+    correct: 0
   },
 
   // ==========================================
@@ -155,8 +145,7 @@ const ALL_QUESTIONS = [
       "Tag d'audit invisible 1x1 d'impression",
       "Notification push sponsorisée textuelle"
     ],
-    correct: 0,
-    explanation: "L'Outstream et les formats interactifs offrent une immersion forte au sein du contenu éditorial pour travailler la considération."
+    correct: 0
   },
   {
     id: 12,
@@ -168,8 +157,7 @@ const ALL_QUESTIONS = [
       "L'intégration d'une boucle d'animation limitée à 30 secondes",
       "L'appel à des polices sécurisées hébergées en HTTPS"
     ],
-    correct: 0,
-    explanation: "Le clickTag doit être dynamique pour que le DSP et l'ad server puissent injecter leurs URLs de comptabilisation de clics."
+    correct: 0
   },
   {
     id: 13,
@@ -181,8 +169,7 @@ const ALL_QUESTIONS = [
       "L'Instream ne peut jamais être skippé par l'internaute",
       "L'Instream ne requiert aucun fichier vidéo MP4 hébergé"
     ],
-    correct: 0,
-    explanation: "L'Instream est incorporé à un lecteur diffusant du contenu vidéo (ex: YouTube, replay), alors que l'Outstream naît dans une page sans lecteur natif."
+    correct: 0
   },
   {
     id: 14,
@@ -194,8 +181,7 @@ const ALL_QUESTIONS = [
       "Interdiction formelle de proposer un bouton 'Fermer' avant 30 secondes",
       "Obligation d'occuper au minimum 90% de la surface de l'écran dès l'arrivée sur la page"
     ],
-    correct: 0,
-    explanation: "Les standards IAB et Better Ads imposent l'autoplay silencieux (muted) pour préserver l'expérience utilisateur."
+    correct: 0
   },
   {
     id: 15,
@@ -207,8 +193,7 @@ const ALL_QUESTIONS = [
       "300 x 250 pixels",
       "160 x 600 pixels"
     ],
-    correct: 0,
-    explanation: "Le format 728x90 est le Leaderboard classique standardisé par l'IAB."
+    correct: 0
   },
 
   // ==========================================
@@ -224,8 +209,7 @@ const ALL_QUESTIONS = [
       "Le Floodlight ne fonctionne que sur les campagnes payantes du Search Google",
       "L'UTM dépose un cookie tiers sécurisé sur le navigateur pour 90 jours"
     ],
-    correct: 0,
-    explanation: "Le tag Floodlight (Google Marketing Platform) permet d'attribuer des conversions post-clic ET post-view dédupliquées."
+    correct: 0
   },
   {
     id: 17,
@@ -237,8 +221,7 @@ const ALL_QUESTIONS = [
       "La conversion provient exclusivement d'une recherche naturelle sur Google",
       "La vidéo publicitaire a été visionnée à 100% sans générer de visite sur le site"
     ],
-    correct: 0,
-    explanation: "L'attribution post-view mesure l'impact mémoriel d'une impression vue sans clic direct."
+    correct: 0
   },
   {
     id: 18,
@@ -250,8 +233,7 @@ const ALL_QUESTIONS = [
       "La bannière a généré au moins un clic valide de la part de l'utilisateur",
       "La page a été chargée entièrement jusqu'au pied de page (footer)"
     ],
-    correct: 0,
-    explanation: "Le standard MRC/IAB pour le Display est : 50% des pixels visibles pendant au moins 1 seconde continue (2 secondes pour la vidéo)."
+    correct: 0
   },
   {
     id: 19,
@@ -263,8 +245,7 @@ const ALL_QUESTIONS = [
       "Ignorer complètement les clics pour ne mesurer que les impressions d'arrière-plan",
       "Supprimer l'obligation de poser des tags de tracking sur les pages de paiement"
     ],
-    correct: 0,
-    explanation: "Le modèle Data-Driven analyse l'ensemble des chemins avec et sans conversion pour pondérer statistiquement chaque point de contact."
+    correct: 0
   },
   {
     id: 20,
@@ -276,8 +257,7 @@ const ALL_QUESTIONS = [
       "Le coût moyen facturé par visiteur unique sur le site web",
       "Le pourcentage de vidéos lancées avec le son activé"
     ],
-    correct: 0,
-    explanation: "Le VTR (ou Video Completion Rate) correspond au nombre de vidéos visionnées jusqu'au terme divisé par le nombre total d'impressions vidéo."
+    correct: 0
   },
 
   // ==========================================
@@ -293,8 +273,7 @@ const ALL_QUESTIONS = [
       "Il supprime automatiquement les formats publicitaires vidéo non skippables",
       "Il interdit formellement l'utilisation de tout ciblage géographique par pays"
     ],
-    correct: 0,
-    explanation: "La TC String générée par la CMP conforme TCF v2.2 transmet les consentements explicites accordés aux différentes finalités et prestataires."
+    correct: 0
   },
   {
     id: 22,
@@ -306,8 +285,7 @@ const ALL_QUESTIONS = [
       "Le ciblage exclusif des réseaux sociaux privés",
       "Le passage obligatoire en enchères au second prix"
     ],
-    correct: 0,
-    explanation: "Les technologies de Brand Suitability (IAS, DoubleVerify, Oracle/Moat) analysent le contenu contextuel pour bloquer les environnements à risque."
+    correct: 0
   },
   {
     id: 23,
@@ -319,12 +297,9 @@ const ALL_QUESTIONS = [
       "sitemap.xml",
       "sellers.json"
     ],
-    correct: 0,
-    explanation: "Le standard ads.txt permet aux acheteurs de vérifier que le vendeur/SSP a le droit légitime de vendre l'inventaire de ce média."
+    correct: 0
   },
   {
     id: 24,
     module: "Privacy, brand safety & qualité",
-    question: "Quelle forme de trafic invalide (IVT) relève du 'Sophisticated Invalid Traffic' (SIVT) par opposition au 'General Invalid Traffic' (GIVT) ?",
-    options: [
-      "Des botnets sophistiqués imitant le comportement humain et des fraudes par injection de pixels ou détournement de domaine (domain spoofing)",
+    question: "Quelle
